@@ -95,7 +95,7 @@
                                 </h3>
                                 <div class="row">
                                     <div class="col-xs-9">
-                                        <h4><span class="label label-success">by <%=book.author %></span> <span class="label label-default"><%=book.genre %></span>
+                                        <h4><span class="label label-success"><a href="/authors/<%=bookid %>">by <%=book.author %></a></span> <span class="label label-default"><%=book.genre %></span>
                                         </h4>
                                         <p>
                                             <%=book.description %>
@@ -108,7 +108,7 @@
                         </div>
 
 
-                        <a href="/books" class="btn btn-primary pull-right btnNext">Go Back to Books Page</a>
+                        <a onclick="history.back()" class="btn btn-primary pull-right btnNext">Go Back</a>
 
 
                     </div>

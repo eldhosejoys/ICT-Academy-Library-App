@@ -8,9 +8,9 @@
         <%=title%>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
 </head>
 
 <body>
@@ -84,34 +84,29 @@
                 <div class="panel">
                     <div class="panel-body">
 
-                        <% for(i=0 ; i< books.length ; i++){ %>
-                            <div class="row">
-                                <br>
-                                <div class="col-md-2 col-sm-3 text-center">
-                                    <a class="story-title"><img alt="logo" src="<%=books[i].img %>" style="width:100px;height:100px" class="img-circle"></a>
-                                </div>
-                                <div class="col-md-10 col-sm-9">
-                                    <h3>
-                                        <%=books[i].title %>
-                                    </h3>
-                                    <div class="row">
-                                        <div class="col-xs-9">
-                                            <h4><span class="label label-success"><a href="/authors/<%=i %>">by <%=books[i].author %></a></span> <span class="label label-default"><%=books[i].genre %></span>
-                                            </h4>
-                                            <h4>
-                                                <small style="font-family:courier,' new courier ';" class="text-muted"><a href="/books/<%=i %>" class="text-muted">Read More</a></small>
-                                            </h4>
-                                        </div>
-                                        <div class="col-xs-3"></div>
-                                    </div>
-                                    <br><br>
-                                </div>
+                        <div class="row">
+                            <br>
+                            <div class="col-md-2 col-sm-3 text-center">
+                                <a class="story-title"><img alt="logo" src="<%=author.img %>" style="width:100px;height:100px" class="img-circle"></a>
                             </div>
-                            <hr>
-                            <% } %>
+                            <div class="col-md-10 col-sm-9">
+                                <h3>
+                                    <%=author.author %>
+                                </h3>
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <p>
+                                            <%=author.description %>
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-3"> </div>
+                                </div>
+                                <br><br>
+                            </div>
+                        </div>
 
 
-                                <a href="/books#" class="btn btn-primary pull-right btnNext">More <i class="glyphicon glyphicon-chevron-right"></i></a>
+                        <a onclick="history.back()" class="btn btn-primary pull-right btnNext">Go Back</a>
 
 
                     </div>
@@ -166,7 +161,7 @@
     </footer>
     <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 
 </html>
