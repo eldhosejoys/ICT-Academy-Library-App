@@ -41,37 +41,38 @@ formsubmitsignup.onsubmit = function() {
 
 function emailvalidate() {
     if (emailRegex.test(email.value)) {
-        emailerror.innerHTML = "<div class='mt-4'><span class='alert alert-success rounded-0'>✔ Valid Email Id.</span></div>";
+        emailerror.innerHTML = "<div class='mt-4 alert alert-success rounded-0'>✔ Valid Email Id.</div>";
         emailvalid = 1;
     } else {
-        emailerror.innerHTML = "<div class='mt-4'><span class='alert alert-danger rounded-0'>✖ Invalid Email Id.</span></div>";
+        emailerror.innerHTML = "<div class='mt-4 alert alert-danger rounded-0'>✖ Invalid Email Id.</div>";
         emailvalid = 0;
     }
 }
 
 function mobilevalidate() {
     if (mobileRegex.test(mobile.value) || mobileRegex1.test(mobile.value) || mobileRegex2.test(mobile.value) || mobileRegex3.test(mobile.value)) {
-        mobileerror.innerHTML = "<div class='mt-4'><span class='alert alert-success rounded-0'>✔ Valid Mobile Number.</span></div>";
+        mobileerror.innerHTML = "<div class='mt-4 alert alert-success rounded-0'>✔ Valid Mobile Number.</div>";
         mobilevalid = 1;
     } else {
-        mobileerror.innerHTML = "<div class='mt-4'><span class='alert alert-danger rounded-0'>✖ Invalid Mobile Number.</span></div>";
+        mobileerror.innerHTML = "<div class='mt-4 alert alert-danger rounded-0'>✖ Invalid Mobile Number.</div>";
         mobilevalid = 0;
     }
 }
 
 function namevalidate() {
     if (nameRegex.test(pname.value)) {
-        nameerror.innerHTML = "<div class='mt-4'><span class='alert alert-success rounded-0'>✔ Name looks fine.</span></div>";
+        nameerror.innerHTML = "<div class='mt-4 alert alert-success rounded-0'>✔ Name looks fine.</div>";
         namevalid = 1;
     } else {
-        nameerror.innerHTML = "<div class='mt-4'><span class='alert alert-danger rounded-0'>✖ Name doesn't look fine.</span></div>";
+        nameerror.innerHTML = "<div class='mt-4 alert alert-danger rounded-0'>✖ Name doesn't look fine.</div>";
         namevalid = 0;
     }
 }
 
 function pwdvalidate() {
-    p1 = p2 = p3 = p4 = 0;
+    p1 = p2 = p3 = p4 = p5 = 0;
     var pstrength = 0;
+    p5w = "<span class='text-danger'>✖ Optional Special character not found</span>";
     p4w = "<span class='text-danger'>✖ Minimum 8 characters required</span>";
     p3w = "<span class='text-danger'>✖ Atleast one number required</span>";
     p2w = "<span class='text-danger'>✖ Atleast one lower case required</span>";
@@ -97,7 +98,9 @@ function pwdvalidate() {
         p1w = "<span class='text-success'>✔ Atleast one upper case found</span>";
     }
     if (spChars.test(pwd.value)) {
+        p5 = 1; // special char condition good
         pstrength = pstrength + 1;
+        p5w = "<span class='text-success'>✔ Atleast one special character found</span>";
     }
 
     if (pstrength <= 0) {
@@ -131,11 +134,14 @@ function pwdvalidate() {
         pl = 100;
     }
 
-    if (p1 == 1 && p2 == 1 && p3 == 1 && p4 == 1) {
+    if (p1 == 1 && p2 == 1 && p3 == 1 && p4 == 1 && p5 == 1) {
         pwderror.innerHTML = "<div class='mt-4 alert alert-success rounded-0'>✔ Password looks fine.</br></br>Password Strength: " + pwdstrength + "<div class='progress'><div class='progress-bar " + pstrengthbg + "' role='progressbar' style='width: " + pl + "%' aria-valuenow=" + pstrength + " aria-valuemin='0' aria-valuemax='5'></div></div></div></div>";
         pwdvalid = 1;
+    } else if (p1 == 1 && p2 == 1 && p3 == 1 && p4 == 1 && p5 == 0) {
+        pwderror.innerHTML = "<div class='mt-4 alert alert-success rounded-0'>✔ Password looks fine.</br>" + p5w + "</br>Password Strength: " + pwdstrength + "<div class='progress'><div class='progress-bar " + pstrengthbg + "' role='progressbar' style='width: " + pl + "%' aria-valuenow=" + pstrength + " aria-valuemin='0' aria-valuemax='5'></div></div></div></div>";
+        pwdvalid = 1;
     } else {
-        pwderror.innerHTML = "<div class='mt-4 alert alert-info rounded-0'>" + p4w + "</br>" + p3w + "</br>" + p2w + "</br>" + p1w + "</br></br>Password Strength: " + pwdstrength + "<div class='progress'><div class='progress-bar " + pstrengthbg + "' role='progressbar' style='width: " + pl + "%' aria-valuenow=" + pstrength + " aria-valuemin='0' aria-valuemax='5'></div></div></div></div>";
+        pwderror.innerHTML = "<div class='mt-4 alert alert-info rounded-0'>" + p5w + "</br>" + p4w + "</br>" + p3w + "</br>" + p2w + "</br>" + p1w + "</br></br>Password Strength: " + pwdstrength + "<div class='progress'><div class='progress-bar " + pstrengthbg + "' role='progressbar' style='width: " + pl + "%' aria-valuenow=" + pstrength + " aria-valuemin='0' aria-valuemax='5'></div></div></div></div>";
         pwdvalid = 0;
     }
 }

@@ -1,7 +1,7 @@
 const express = require("express");
 const booksRouter = express.Router();
 
-function router(nav) {
+function router(nav, nav2) {
 
     const books = [{
         title: "Tom and Jerry",
@@ -22,6 +22,7 @@ function router(nav) {
             title: "Books",
             description: "Displays books of the Library App",
             nav,
+            nav2,
             books
         });
     });
@@ -33,6 +34,7 @@ function router(nav) {
             description: "Displaying " + books[id].title +
                 " book in the Library App",
             nav,
+            nav2,
             bookid: id,
             book: books[id]
         });

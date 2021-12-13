@@ -1,7 +1,7 @@
 const express = require("express");
 const authorRouter = express.Router();
 
-function router(nav) {
+function router(nav, nav2) {
 
     const authors = [{
         author: "Joseph Barbera",
@@ -20,6 +20,7 @@ function router(nav) {
             title: "Authors",
             description: "Displays authors of the books in the Library App",
             nav,
+            nav2,
             authors
         });
     });
@@ -30,6 +31,7 @@ function router(nav) {
             title: "Author",
             description: "Displaying the author details",
             nav,
+            nav2,
             author: authors[id]
         });
     });

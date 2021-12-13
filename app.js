@@ -8,8 +8,21 @@ const nav = [{
     link: "/authors"
 }];
 
-const booksRouter = require('./src/routes/booksRoutes')(nav);
-const authorRouter = require('./src/routes/authorRoutes')(nav);
+const nav2 = [{
+    text: "Signin",
+    link: "/signin"
+}, {
+    text: "Signup",
+    link: "/signup"
+}];
+
+// const nav3 = [{
+//     text: "Logout",
+//     link: "/"
+// }];
+
+const booksRouter = require('./src/routes/booksRoutes')(nav, nav2);
+const authorRouter = require('./src/routes/authorRoutes')(nav, nav2);
 const app = new express();
 
 app.use(express.static('./public'));
@@ -22,7 +35,28 @@ app.get("/", function(req, res) {
     res.render("index", {
         title: "Home Page",
         description: "The home page of the Library App",
-        nav
+        nav,
+        nav2
+
+    });
+});
+
+app.get("/signin", function(req, res) {
+    res.render("signin", {
+        title: "Login Page",
+        description: "Login to the Library App",
+        nav,
+        nav2
+
+    });
+});
+
+app.get("/signup", function(req, res) {
+    res.render("signup", {
+        title: "Signup Page",
+        description: "Signup to the Library App",
+        nav,
+        nav2
 
     });
 });
