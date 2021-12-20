@@ -8,9 +8,9 @@
         <%=title%>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
 </head>
 
 <body>
@@ -94,19 +94,9 @@
                                         <form id="formsubmitlogin">
                                             <span id="formerror"></span>
                                         <div class="form-group">
-                                            <label for="email">Title:</label>
-                                            <input required type="text" maxlength="60" class="form-control" id="title">
-                                            <span id="titleerror"></span>
-                                        </div>
-                                        <div class="form-group">
                                             <label for="author">Author:</label>
                                             <input required type="text" maxlength="30" class="form-control" id="author">
                                             <span id="authorerror"></span>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="genre">Genre:</label>
-                                            <input required type="text" maxlength="25" class="form-control" id="genre">
-                                            <span id="genreerror"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="image">Image:</label>
@@ -118,7 +108,7 @@
                                             <textarea required type="text" row="5" maxlength="30000" class="form-control" id="description"></textarea>
                                             <span id="descriptionerror"></span>
                                         </div>
-                                        <button type="submit" class="btn btn-success">Add New Book</button>
+                                        <button type="submit" class="btn btn-success">Add New Author</button>
                                         </form>
                                         </span><br>
                                         <p><a href="/signup"> Signup for an Account</a></p>
@@ -181,7 +171,7 @@
     </footer>
     <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 
 </html>
