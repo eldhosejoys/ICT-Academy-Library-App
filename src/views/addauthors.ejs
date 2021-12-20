@@ -81,7 +81,52 @@
                 <div class="panel">
                     <div class="panel-body">
 
-                        <p>This is just the dashboard home page.</p>
+                        <div class="row">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-6">
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h1 class="card-title text-center mb-5">
+                                            <%=description%>
+                                        </h1>
+                                        <span class="card-text">
+                                        <form id="formsubmitlogin">
+                                            <span id="formerror"></span>
+                                        <div class="form-group">
+                                            <label for="email">Title:</label>
+                                            <input required type="text" maxlength="60" class="form-control" id="title">
+                                            <span id="titleerror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="author">Author:</label>
+                                            <input required type="text" maxlength="30" class="form-control" id="author">
+                                            <span id="authorerror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="genre">Genre:</label>
+                                            <input required type="text" maxlength="25" class="form-control" id="genre">
+                                            <span id="genreerror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="image">Image:</label>
+                                            <input required type="file" class="form-control" id="image">
+                                            <span id="imageerror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Description:</label>
+                                            <textarea required type="text" row="5" maxlength="30000" class="form-control" id="description"></textarea>
+                                            <span id="descriptionerror"></span>
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Add New Book</button>
+                                        </form>
+                                        </span><br>
+                                        <p><a href="/signup"> Signup for an Account</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3"></div>
+                        </div>
 
 
                     </div>

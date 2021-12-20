@@ -23,6 +23,7 @@ const nav2 = [{
 
 const booksRouter = require('./src/routes/booksRoutes')(nav, nav2);
 const authorRouter = require('./src/routes/authorRoutes')(nav, nav2);
+const dashboardRouter = require('./src/routes/dashboardRoutes')(nav, nav2);
 const app = new express();
 
 app.use(express.static('./public'));
@@ -30,6 +31,7 @@ app.set('view engine', 'ejs');
 app.set('views', './src/views');
 app.use('/books', booksRouter);
 app.use('/authors', authorRouter);
+app.use('/dashboard', dashboardRouter);
 
 app.get("/", function(req, res) {
     res.render("index", {

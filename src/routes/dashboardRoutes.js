@@ -3,7 +3,6 @@ const dashboardRouter = express.Router();
 
 function router(nav) {
 
-
     dashboardRouter.get("/", function(req, res) {
         res.render("dashboard", {
             title: "Dashboard",
