@@ -26,6 +26,7 @@ const authorRouter = require('./src/routes/authorRoutes')(nav, nav2);
 const dashboardRouter = require('./src/routes/dashboardRoutes')(nav, nav2);
 const app = new express();
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./public'));
 app.set('view engine', 'ejs');
 app.set('views', './src/views');

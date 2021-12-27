@@ -1,6 +1,7 @@
 const express = require("express");
 const dashboardRouter = express.Router();
 const bookdata = require('../models/bookdata');
+const authordata = require('../models/authordata');
 
 function router(nav) {
 
@@ -23,17 +24,29 @@ function router(nav) {
         });
     });
 
-    dashboardRouter.get("/addbook", function(req, res) {
+    dashboardRouter.post("/addbook", function(req, res) {
         var item = {
-            title: req.query.title,
-            author: req.query.author,
-            genre: req.query.genre,
-            image: req.query.image,
-            description: req.query.description
+            title: req.body.title,
+            author: req.body.author,
+            genre: req.body.genre,
+            image: req.body.image,
+            description: req.body.description
         }
         var book = bookdata(item);
         book.save();
         res.redirect('/dashboard/addbooks');
+
+    });
+
+    dashboardRouter.post("/addauthor", function(req, res) {
+        var item = {
+            author: req.body.author,
+            image: req.body.image,
+            description: req.body.description
+        }
+        var author = authordata(item);
+        author.save();
+        res.redirect('/dashboard/addauthors');
 
     });
 

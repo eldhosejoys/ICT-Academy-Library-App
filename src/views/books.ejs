@@ -89,7 +89,7 @@
                             <div class="row">
                                 <br>
                                 <div class="col-md-2 col-sm-3 text-center">
-                                    <a class="story-title"><img alt="logo" src="<%=books[i].img %>" style="width:100px;height:100px" class="img-circle"></a>
+                                    <a class="story-title"><img alt="logo" src="<%=books[i].image %>" style="width:100px;height:100px" class="img-circle"></a>
                                 </div>
                                 <div class="col-md-10 col-sm-9">
                                     <h3>
@@ -100,7 +100,7 @@
                                             <h4><span class="label label-success"><a href="/authors/<%=i %>">by <%=books[i].author %></a></span> <span class="label label-default"><%=books[i].genre %></span>
                                             </h4>
                                             <h4>
-                                                <small style="font-family:courier,' new courier ';" class="text-muted"><a href="/books/<%=i %>" class="text-muted">Read More</a></small>
+                                                <small style="font-family:courier,' new courier ';" class="text-muted"><a href="/books/<%=books[i]._id %>" class="text-muted">Read More</a></small>
                                             </h4>
                                         </div>
                                         <div class="col-xs-3"></div>
