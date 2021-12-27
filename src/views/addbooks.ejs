@@ -23,7 +23,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-                <a href="#" class="navbar-brand">Home</a>
+                <a href="/dashboard" class="navbar-brand">Home</a>
             </div>
             <nav class="collapse navbar-collapse" role="navigation">
                 <ul class="nav navbar-nav">
@@ -91,31 +91,31 @@
                                             <%=description%>
                                         </h1>
                                         <span class="card-text">
-                                        <form id="formsubmitlogin">
+                                        <form action="/dashboard/addbook" method="GET" id="formsubmitlogin">
                                             <span id="formerror"></span>
                                         <div class="form-group">
                                             <label for="email">Title:</label>
-                                            <input required type="text" maxlength="60" class="form-control" id="title">
+                                            <input required type="text" maxlength="60" class="form-control" id="title" name="title">
                                             <span id="titleerror"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="author">Author:</label>
-                                            <input required type="text" maxlength="30" class="form-control" id="author">
+                                            <input required type="text" maxlength="30" class="form-control" id="author" name="author">
                                             <span id="authorerror"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="genre">Genre:</label>
-                                            <input required type="text" maxlength="25" class="form-control" id="genre">
+                                            <input required type="text" maxlength="25" class="form-control" id="genre" name="genre">
                                             <span id="genreerror"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="image">Image:</label>
-                                            <input required type="file" class="form-control" id="image">
+                                            <input required type="file" class="form-control" id="image" name="image">
                                             <span id="imageerror"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="description">Description:</label>
-                                            <textarea required type="text" row="5" maxlength="30000" class="form-control" id="description"></textarea>
+                                            <textarea required type="text" row="5" maxlength="30000" class="form-control" id="description" name="description"></textarea>
                                             <span id="descriptionerror"></span>
                                         </div>
                                         <button type="submit" class="btn btn-success">Add New Book</button>

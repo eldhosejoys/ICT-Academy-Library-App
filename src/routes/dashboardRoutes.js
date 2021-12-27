@@ -1,5 +1,6 @@
 const express = require("express");
 const dashboardRouter = express.Router();
+const bookdata = require('../models/bookdata');
 
 function router(nav) {
 
@@ -20,6 +21,20 @@ function router(nav) {
             description: "This is the User Dashboard.",
             nav
         });
+    });
+
+    dashboardRouter.get("/addbook", function(req, res) {
+        var item = {
+            title: req.query.title,
+            author: req.query.author,
+            genre: req.query.genre,
+            image: req.query.image,
+            description: req.query.description
+        }
+        var book = bookdata(item);
+        book.save();
+        res.redirect('/dashboard/addbooks');
+
     });
 
     dashboardRouter.get("/:id", function(req, res) {
