@@ -8,9 +8,9 @@
         <%=title%>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
 </head>
 
 <body>
@@ -36,13 +36,9 @@
                         <% } %>
                 </ul>
                 <ul class="nav navbar-right navbar-nav">
-                    <% for(i=0 ; i< nav2.length ; i++){ %>
-                        <li>
-                            <a href="<%=nav2[i].link %>">
-                                <%=nav2[i].text %>
-                            </a>
-                        </li>
-                        <% } %>
+                    <li>
+                        <a href="/">Logout</a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -85,34 +81,48 @@
                 <div class="panel">
                     <div class="panel-body">
 
-                        <% for(i=0 ; i< books.length ; i++){ %>
-                            <div class="row">
-                                <br>
-                                <div class="col-md-2 col-sm-3 text-center">
-                                    <a class="story-title"><img alt="logo" src="<%=books[i].image %>" style="width:100px;height:100px" class="img-circle"></a>
+                        <div class="card">
+                            <div class="card-body">
+                                <h1 class="card-title text-center mb-5">
+                                    <%=description%>
+                                </h1>
+                                <span class="card-text">
+                                <form action="/dashboard/updatebook" method="POST" id="formsubmitlogin">
+                                    <span id="formerror"></span>
+                                <input type="hidden" required type="text" maxlength="60" class="form-control" name="id" name="<%=books._id %>">
+                                <div class="form-group">
+                                    <label for="email">Title:</label>
+                                    <input required type="text" maxlength="60" class="form-control" id="title" name="title" value="<%=books.title %>">
+                                    <span id="titleerror"></span>
                                 </div>
-                                <div class="col-md-10 col-sm-9">
-                                    <h3>
-                                        <%=books[i].title %>
-                                    </h3>
-                                    <div class="row">
-                                        <div class="col-xs-9">
-                                            <h4><span class="label label-success"><a href="#">by <%=books[i].author %></a></span> <span class="label label-default"><%=books[i].genre %></span>
-                                            </h4>
-                                            <h4>
-                                                <small style="font-family:courier,' new courier ';" class="text-muted"><a href="/books/<%=books[i]._id %>" class="text-muted">Read More</a></small>
-                                            </h4>
-                                        </div>
-                                        <div class="col-xs-3"></div>
-                                    </div>
-                                    <br><br>
+                                <div class="form-group">
+                                    <label for="author">Author:</label>
+                                    <input required type="text" maxlength="30" class="form-control" id="author" name="author" value="<%=books.author %>">
+                                    <span id="authorerror"></span>
                                 </div>
+                                <div class="form-group">
+                                    <label for="genre">Genre:</label>
+                                    <input required type="text" maxlength="25" class="form-control" id="genre" name="genre" value="<%=books.genre %>">
+                                    <span id="genreerror"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="image">Image:</label>
+                                    <input required type="file" class="form-control" id="image" name="image" value="<%=books.image %>">
+                                    <span id="imageerror"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description:</label>
+                                    <textarea required type="text" row="5" maxlength="30000" class="form-control" id="description" name="description" value="<%=books.description %>"></textarea>
+                                    <span id="descriptionerror"></span>
+                                </div>
+                                <button type="submit" class="btn btn-success">Update Book</button>
+                                </form>
+                                </span><br>
                             </div>
-                            <hr>
-                            <% } %>
+                        </div>
 
 
-                                <a href="/books#" class="btn btn-primary pull-right btnNext">More <i class="glyphicon glyphicon-chevron-right"></i></a>
+                        <a onclick="history.back()" class="btn btn-primary pull-right btnNext">Go Back</a>
 
 
                     </div>
@@ -167,7 +177,7 @@
     </footer>
     <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 
 </html>

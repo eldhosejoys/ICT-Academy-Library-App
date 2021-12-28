@@ -8,9 +8,9 @@
         <%=title%>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
 </head>
 
 <body>
@@ -36,13 +36,9 @@
                         <% } %>
                 </ul>
                 <ul class="nav navbar-right navbar-nav">
-                    <% for(i=0 ; i< nav2.length ; i++){ %>
-                        <li>
-                            <a href="<%=nav2[i].link %>">
-                                <%=nav2[i].text %>
-                            </a>
-                        </li>
-                        <% } %>
+                    <li>
+                        <a href="/">Logout</a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -85,22 +81,21 @@
                 <div class="panel">
                     <div class="panel-body">
 
-                        <% for(i=0 ; i< books.length ; i++){ %>
+                        <% for(i=0 ; i< authors.length ; i++){ %>
                             <div class="row">
                                 <br>
                                 <div class="col-md-2 col-sm-3 text-center">
-                                    <a class="story-title"><img alt="logo" src="<%=books[i].image %>" style="width:100px;height:100px" class="img-circle"></a>
+                                    <a class="story-title"><img alt="logo" src="<%=authors[i].image %>" style="width:100px;height:100px" class="img-circle"></a>
                                 </div>
                                 <div class="col-md-10 col-sm-9">
                                     <h3>
-                                        <%=books[i].title %>
+                                        <%=authors[i].author %>
                                     </h3>
                                     <div class="row">
                                         <div class="col-xs-9">
-                                            <h4><span class="label label-success"><a href="#">by <%=books[i].author %></a></span> <span class="label label-default"><%=books[i].genre %></span>
-                                            </h4>
                                             <h4>
-                                                <small style="font-family:courier,' new courier ';" class="text-muted"><a href="/books/<%=books[i]._id %>" class="text-muted">Read More</a></small>
+                                                <form action="/dashboard/deleteauthor" method="POST" id="formsubmitlogin">
+                                                    <div class="form-group"><input type="hidden" required class="form-control" name="id" value="<%=authors[i].id %>"></div><button type="submit" class="btn btn-danger" onclick="return confirm(`Are you sure to Delete this author? You cannot undo this.💀`)">Delete this Book</button></form>
                                             </h4>
                                         </div>
                                         <div class="col-xs-3"></div>
@@ -112,7 +107,7 @@
                             <% } %>
 
 
-                                <a href="/books#" class="btn btn-primary pull-right btnNext">More <i class="glyphicon glyphicon-chevron-right"></i></a>
+                                <a href="/authors#" class="btn btn-primary pull-right btnNext">More <i class="glyphicon glyphicon-chevron-right"></i></a>
 
 
                     </div>
@@ -167,7 +162,7 @@
     </footer>
     <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 
 </html>
