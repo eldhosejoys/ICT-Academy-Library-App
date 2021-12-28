@@ -15,10 +15,10 @@ function router(nav) {
         text: "Add Authors",
         link: "/dashboard/addauthors"
     }, {
-        text: "Delete Books",
+        text: "Update/Delete Books",
         link: "/dashboard/deletebooks"
     }, {
-        text: "Delete Authors",
+        text: "Update/Delete Authors",
         link: "/dashboard/deleteauthors"
     }];
 
@@ -66,10 +66,34 @@ function router(nav) {
             image: req.body.image,
             description: req.body.description
         }
-        var book = bookdata(item);
-        book.update({ _id: req.body.id });
-        res.redirect('/dashboard/updatebooks?' + req.body.id);
+        bookdata.updateOne({ _id: req.body.id }, item, (err) => {
+            if (err) {
+                console.log(err);
+                res.end(err);
+            } else {
+                // refresh
+                res.redirect('/dashboard/updatebooks?id=' + req.body.id);
+            }
+        });
     });
+    dashboardRouter.post("/updateauthor", function(req, res) {
+        var item = {
+            author: req.body.author,
+            image: req.body.image,
+            description: req.body.description
+        }
+        authordata.updateOne({ _id: req.body.id }, item, (err) => {
+            if (err) {
+                console.log(err);
+                res.end(err);
+            } else {
+                // refresh
+                res.redirect('/dashboard/updateauthors?id=' + req.body.id);
+            }
+        });
+    });
+
+
 
 
 
@@ -127,6 +151,16 @@ function router(nav) {
                         description: "Update book: " + req.query.id,
                         nav,
                         books
+                    });
+                })
+        } else if (id == "updateauthors") {
+            authordata.findOne({ _id: req.query.id })
+                .then(function(authors) {
+                    res.render("updateauthors", {
+                        title: "Update Author",
+                        description: "Update Author: " + req.query.id,
+                        nav,
+                        authors
                     });
                 })
         }

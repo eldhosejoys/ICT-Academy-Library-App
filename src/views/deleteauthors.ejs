@@ -94,6 +94,7 @@
                                     <div class="row">
                                         <div class="col-xs-9">
                                             <h4>
+                                                <small style="font-family:courier,' new courier ';" class="text-muted"><a href="/dashboard/updateauthors?id=<%=authors[i]._id %>" class="btn btn-success">Update Author</a></small>
                                                 <form action="/dashboard/deleteauthor" method="POST" id="formsubmitlogin">
                                                     <div class="form-group"><input type="hidden" required class="form-control" name="id" value="<%=authors[i].id %>"></div><button type="submit" class="btn btn-danger" onclick="return confirm(`Are you sure to Delete this author? You cannot undo this.💀`)">Delete this Book</button></form>
                                             </h4>
