@@ -3,9 +3,22 @@ const dashboardRouter = express.Router();
 const bookdata = require('../models/bookdata');
 const authordata = require('../models/authordata');
 const multer = require("multer");
+const fs = require('fs');
+
+const storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, './public/uploads');
+    },
+    filename: function(req, file, callback) {
+        callback(null, Date.now() + file.originalname)
+    }
+});
 const upload = multer({
-    storage: Storage
-}).single('file');
+    storage: storage,
+    limits: {
+        fieldSize: 1024 * 1024 * 2
+    }
+});
 
 function router(nav) {
 
@@ -40,34 +53,64 @@ function router(nav) {
             title: req.body.title,
             author: req.body.author,
             genre: req.body.genre,
-            image: req.file.image,
+            image: req.file.filename,
             description: req.body.description
         }
         var book = bookdata(item);
         book.save();
-        res.redirect('/dashboard/addbooks');
+        res.redirect('/dashboard/addbooks?status=added');
 
     });
 
     dashboardRouter.post("/deletebook", function(req, res) {
+        bookdata.findOne({ _id: req.body.id })
+            .then(function(book) {
+                var location = "./public/uploads/" + book.image;
+                try {
+                    fs.unlinkSync(location)
+
+                } catch (err) {
+                    console.error(err)
+                }
+            })
         bookdata.findByIdAndRemove({ _id: req.body.id })
             .then(function() {
-                res.redirect('/dashboard/deletebooks?' + req.body.id);
+                res.redirect('/dashboard/deletebooks?' + req.body.id + '&status=deleted');
             })
     });
     dashboardRouter.post("/deleteauthor", function(req, res) {
+        authordata.findOne({ _id: req.body.id })
+            .then(function(author) {
+                var location = "./public/uploads/" + author.image;
+                try {
+                    fs.unlinkSync(location)
+
+                } catch (err) {
+                    console.error(err)
+                }
+            })
         authordata.findByIdAndRemove({ _id: req.body.id })
             .then(function() {
-                res.redirect('/dashboard/deleteauthors?' + req.body.id);
+                res.redirect('/dashboard/deleteauthors?' + req.body.id + '&status=deleted');
             })
     });
 
     dashboardRouter.post("/updatebook", upload.single('image'), function(req, res) {
+        bookdata.findOne({ _id: req.body.id })
+            .then(function(book) {
+                var location = "./public/uploads/" + book.image;
+                try {
+                    fs.unlinkSync(location)
+
+                } catch (err) {
+                    console.error(err)
+                }
+            })
         var item = {
             title: req.body.title,
             author: req.body.author,
             genre: req.body.genre,
-            image: req.file.image,
+            image: req.file.filename,
             description: req.body.description
         }
         bookdata.updateOne({ _id: req.body.id }, item, (err) => {
@@ -76,14 +119,24 @@ function router(nav) {
                 res.end(err);
             } else {
                 // refresh
-                res.redirect('/dashboard/updatebooks?id=' + req.body.id);
+                res.redirect('/dashboard/updatebooks?id=' + req.body.id + '&status=updated');
             }
         });
     });
     dashboardRouter.post("/updateauthor", upload.single('image'), function(req, res) {
+        authordata.findOne({ _id: req.body.id })
+            .then(function(author) {
+                var location = "./public/uploads/" + author.image;
+                try {
+                    fs.unlinkSync(location)
+
+                } catch (err) {
+                    console.error(err)
+                }
+            })
         var item = {
             author: req.body.author,
-            image: req.file.image,
+            image: req.file.filename,
             description: req.body.description
         }
         authordata.updateOne({ _id: req.body.id }, item, (err) => {
@@ -92,7 +145,7 @@ function router(nav) {
                 res.end(err);
             } else {
                 // refresh
-                res.redirect('/dashboard/updateauthors?id=' + req.body.id);
+                res.redirect('/dashboard/updateauthors?id=' + req.body.id + '&status=updated');
             }
         });
     });
@@ -104,12 +157,12 @@ function router(nav) {
     dashboardRouter.post("/addauthor", upload.single('image'), function(req, res) {
         var item = {
             author: req.body.author,
-            image: req.file.image,
+            image: req.file.filename,
             description: req.body.description
         }
         var author = authordata(item);
         author.save();
-        res.redirect('/dashboard/addauthors');
+        res.redirect('/dashboard/addauthors?status=added');
 
     });
 
@@ -120,12 +173,14 @@ function router(nav) {
                 title: "Add New Book",
                 description: "You can add new books here.",
                 nav,
+                status: req.query.status
             });
         } else if (id == "addauthors") {
             res.render("addauthors", {
                 title: "Add New Author",
                 description: "You can add new authors here.",
                 nav,
+                status: req.query.status
             });
         } else if (id == "deletebooks") {
             bookdata.find()
@@ -134,7 +189,8 @@ function router(nav) {
                         title: "Delete Books",
                         description: "Delete books of the Library App",
                         nav,
-                        books
+                        books,
+                        status: req.query.status
                     });
                 })
         } else if (id == "deleteauthors") {
@@ -144,7 +200,8 @@ function router(nav) {
                         title: "Delete Authors",
                         description: "Delete authors of the books in the Library App",
                         nav,
-                        authors
+                        authors,
+                        status: req.query.status
                     });
                 })
         } else if (id == "updatebooks") {
@@ -154,7 +211,8 @@ function router(nav) {
                         title: "Update Book",
                         description: "Update book: " + req.query.id,
                         nav,
-                        books
+                        books,
+                        status: req.query.status
                     });
                 })
         } else if (id == "updateauthors") {
@@ -164,7 +222,8 @@ function router(nav) {
                         title: "Update Author",
                         description: "Update Author: " + req.query.id,
                         nav,
-                        authors
+                        authors,
+                        status: req.query.status
                     });
                 })
         }
@@ -172,4 +231,5 @@ function router(nav) {
 
     return dashboardRouter;
 }
+module.exports = router;
 module.exports = router;

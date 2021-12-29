@@ -80,49 +80,54 @@
 
                 <div class="panel">
                     <div class="panel-body">
-
-                        <div class="card">
-                            <div class="card-body">
-                                <h1 class="card-title text-center mb-5">
-                                    <%=description%>
-                                </h1>
-                                <span class="card-text">
-                                <form action="/dashboard/updatebook" method="POST" id="formsubmitlogin">
-                                    <span id="formerror"></span>
-                                <input type="hidden" required type="text" maxlength="60" class="form-control" name="id" value="<%=books._id %>">
-                                <div class="form-group">
-                                    <label for="email">Title:</label>
-                                    <input required type="text" maxlength="60" class="form-control" id="title" name="title" value="<%=books.title %>">
-                                    <span id="titleerror"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="author">Author:</label>
-                                    <input required type="text" maxlength="30" class="form-control" id="author" name="author" value="<%=books.author %>">
-                                    <span id="authorerror"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="genre">Genre:</label>
-                                    <input required type="text" maxlength="25" class="form-control" id="genre" name="genre" value="<%=books.genre %>">
-                                    <span id="genreerror"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="image">Image:</label>
-                                    <input required type="file" class="form-control" id="image" name="image" value="<%=books.image %>">
-                                    <span id="imageerror"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Description:</label>
-                                    <textarea required type="text" row="5" maxlength="30000" class="form-control" id="description" name="description" value="<%=books.description %>"></textarea>
-                                    <span id="descriptionerror"></span>
-                                </div>
-                                <button type="submit" class="btn btn-success">Update Book</button>
-                                </form>
-                                </span><br>
+                        <% if(status == "updated"){ %>
+                            <div class="alert alert-success" role="alert">
+                                Successfully Updated Book.
                             </div>
-                        </div>
+                            <% } %>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h1 class="card-title text-center mb-5">
+                                            <%=description%>
+                                        </h1>
+                                        <span class="card-text">
+                                <form action="/dashboard/updatebook" enctype="multipart/form-data" method="POST" id="formsubmitlogin">
+                                    <span id="formerror"></span>
+                                        <input type="hidden" required type="text" maxlength="60" class="form-control" name="id" value="<%=books._id %>">
+                                        <div class="form-group">
+                                            <label for="email">Title:</label>
+                                            <input required type="text" maxlength="60" class="form-control" id="title" name="title" value="<%=books.title %>">
+                                            <span id="titleerror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="author">Author:</label>
+                                            <input required type="text" maxlength="30" class="form-control" id="author" name="author" value="<%=books.author %>">
+                                            <span id="authorerror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="genre">Genre:</label>
+                                            <input required type="text" maxlength="25" class="form-control" id="genre" name="genre" value="<%=books.genre %>">
+                                            <span id="genreerror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="image">Image:</label>
+                                            <input required type="file" class="form-control" id="image" name="image" value="<%=books.image %>">
+                                            <span id="imageerror"></span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="description">Description:</label>
+                                            <textarea required type="text" row="5" maxlength="30000" class="form-control" id="description" name="description"><%=books.description %></textarea>
+                                            <span id="descriptionerror"></span>
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Update Book</button>
+                                        </form>
+                                        </span><br>
+                                    </div>
+                                </div>
 
 
-                        <a onclick="history.back()" class="btn btn-primary pull-right btnNext">Go Back</a>
+                                <a onclick="history.back()" class="btn btn-primary pull-right btnNext">Go Back</a>
                     </div>
                 </div>
 

@@ -77,44 +77,48 @@
         <div class="row">
 
             <div class="col-md-12">
-
-                <div class="panel">
-                    <div class="panel-body">
-
-                        <% for(i=0 ; i< books.length ; i++){ %>
-                            <div class="row">
-                                <br>
-                                <div class="col-md-2 col-sm-3 text-center">
-                                    <!-- <a class="story-title"><img alt="logo" src="<%=books[i].image %>" style="width:100px;height:100px" class="img-circle"></a> -->
-                                </div>
-                                <div class="col-md-10 col-sm-9">
-                                    <h3>
-                                        <%=books[i].title %>
-                                    </h3>
-                                    <div class="row">
-                                        <div class="col-xs-9">
-                                            <h4><span class="label label-success"><a href="#">by <%=books[i].author %></a></span> <span class="label label-default"><%=books[i].genre %></span>
-                                            </h4>
-                                            <h4>
-                                                <small style="font-family:courier,' new courier ';" class="text-muted"><a href="/dashboard/updatebooks?id=<%=books[i]._id %>" class="btn btn-success">Update Book</a></small>
-                                                <form action="/dashboard/deletebook" method="POST" id="formsubmitlogin">
-                                                    <div class="form-group"><input type="hidden" required class="form-control" name="id" value="<%=books[i]._id %>"></div><button type="submit" class="btn btn-danger" onclick="return confirm(`Are you sure to Delete this book? You cannot undo this.💀`)">Delete this Book</button></form>
-                                            </h4>
-                                        </div>
-                                        <div class="col-xs-3"></div>
-                                    </div>
-                                    <br><br>
-                                </div>
-                            </div>
-                            <hr>
-                            <% } %>
-
-
-                                <a href="/books#" class="btn btn-primary pull-right btnNext">More <i class="glyphicon glyphicon-chevron-right"></i></a>
-
-
+                <% if(status == "deleted"){ %>
+                    <div class="alert alert-success" role="alert">
+                        Successfully deleted Book.
                     </div>
-                </div>
+                    <% } %>
+                        <div class="panel">
+                            <div class="panel-body">
+
+                                <% for(i=0 ; i< books.length ; i++){ %>
+                                    <div class="row">
+                                        <br>
+                                        <div class="col-md-2 col-sm-3 text-center">
+                                            <a class="story-title"><img alt="logo" src="/uploads/<%=books[i].image %>" style="width:100px;height:100px" class="img-circle"></a>
+                                        </div>
+                                        <div class="col-md-10 col-sm-9">
+                                            <h3>
+                                                <%=books[i].title %>
+                                            </h3>
+                                            <div class="row">
+                                                <div class="col-xs-9">
+                                                    <h4><span class="label label-success"><a href="#">by <%=books[i].author %></a></span> <span class="label label-default"><%=books[i].genre %></span>
+                                                    </h4>
+                                                    <h4>
+                                                        <small style="font-family:courier,' new courier ';" class="text-muted"><a href="/dashboard/updatebooks?id=<%=books[i]._id %>" class="btn btn-success">Update Book</a></small>
+                                                        <form action="/dashboard/deletebook" method="POST" id="formsubmitlogin">
+                                                            <div class="form-group"><input type="hidden" required class="form-control" name="id" value="<%=books[i]._id %>"></div><button type="submit" class="btn btn-danger" onclick="return confirm(`Are you sure to Delete this book? You cannot undo this.💀`)">Delete this Book</button></form>
+                                                    </h4>
+                                                </div>
+                                                <div class="col-xs-3"></div>
+                                            </div>
+                                            <br><br>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <% } %>
+
+
+                                        <a href="/books#" class="btn btn-primary pull-right btnNext">More <i class="glyphicon glyphicon-chevron-right"></i></a>
+
+
+                            </div>
+                        </div>
 
 
 

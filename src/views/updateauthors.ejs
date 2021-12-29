@@ -80,39 +80,43 @@
 
                 <div class="panel">
                     <div class="panel-body">
-
-                        <div class="card">
-                            <div class="card-body">
-                                <h1 class="card-title text-center mb-5">
-                                    <%=description%>
-                                </h1>
-                                <span class="card-text">
-                                <form action="/dashboard/updateauthor" method="POST" id="formsubmitlogin">
-                                    <span id="formerror"></span>
-                                <input type="hidden" required type="text" maxlength="60" class="form-control" name="id" value="<%=authors._id %>">
-                                <div class="form-group">
-                                    <label for="author">Author:</label>
-                                    <input required type="text" maxlength="30" class="form-control" id="author" name="author" value="<%=authors.author %>">
-                                    <span id="authorerror"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="image">Image:</label>
-                                    <input required type="file" class="form-control" id="image" name="image" value="<%=authors.image %>">
-                                    <span id="imageerror"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Description:</label>
-                                    <textarea required type="text" row="5" maxlength="30000" class="form-control" id="description" name="description" value="<%=authors.description %>"></textarea>
-                                    <span id="descriptionerror"></span>
-                                </div>
-                                <button type="submit" class="btn btn-success">Update Author</button>
-                                </form>
-                                </span><br>
+                        <% if(status == "updated"){ %>
+                            <div class="alert alert-success" role="alert">
+                                Successfully Updated Author.
                             </div>
-                        </div>
+                            <% } %>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h1 class="card-title text-center mb-5">
+                                            <%=description%>
+                                        </h1>
+                                        <span class="card-text">
+                                <form action="/dashboard/updateauthor" enctype="multipart/form-data" method="POST" id="formsubmitlogin">
+                                    <span id="formerror"></span>
+                                        <input type="hidden" required type="text" maxlength="60" class="form-control" name="id" value="<%=authors._id %>">
+                                        <div class="form-group">
+                                            <label for="author">Author:</label>
+                                            <input required type="text" maxlength="30" class="form-control" id="author" name="author" value="<%=authors.author %>">
+                                            <span id="authorerror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="image">Image:</label>
+                                            <input required type="file" class="form-control" id="image" name="image" value="<%=authors.image %>">
+                                            <span id="imageerror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Description:</label>
+                                            <textarea required type="text" row="5" maxlength="30000" class="form-control" id="description" name="description"><%=authors.description %></textarea>
+                                            <span id="descriptionerror"></span>
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Update Author</button>
+                                        </form>
+                                        </span><br>
+                                    </div>
+                                </div>
 
 
-                        <a onclick="history.back()" class="btn btn-primary pull-right btnNext">Go Back</a>
+                                <a onclick="history.back()" class="btn btn-primary pull-right btnNext">Go Back</a>
                     </div>
                 </div>
 
