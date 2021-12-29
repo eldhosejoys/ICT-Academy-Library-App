@@ -64,4 +64,6 @@ app.get("/signup", function(req, res) {
     });
 });
 
-app.listen(5000);
+
+var port = process.env.PORT || 3000;
+app.listen(port);
