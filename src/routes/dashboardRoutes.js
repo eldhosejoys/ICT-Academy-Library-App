@@ -2,6 +2,10 @@ const express = require("express");
 const dashboardRouter = express.Router();
 const bookdata = require('../models/bookdata');
 const authordata = require('../models/authordata');
+const multer = require("multer");
+const upload = multer({
+    storage: Storage
+}).single('file');
 
 function router(nav) {
 
@@ -30,13 +34,13 @@ function router(nav) {
         });
     });
 
-    dashboardRouter.post("/addbook", function(req, res) {
+    dashboardRouter.post("/addbook", upload.single('image'), function(req, res) {
 
         var item = {
             title: req.body.title,
             author: req.body.author,
             genre: req.body.genre,
-            image: req.body.image,
+            image: req.file.image,
             description: req.body.description
         }
         var book = bookdata(item);
@@ -58,12 +62,12 @@ function router(nav) {
             })
     });
 
-    dashboardRouter.post("/updatebook", function(req, res) {
+    dashboardRouter.post("/updatebook", upload.single('image'), function(req, res) {
         var item = {
             title: req.body.title,
             author: req.body.author,
             genre: req.body.genre,
-            image: req.body.image,
+            image: req.file.image,
             description: req.body.description
         }
         bookdata.updateOne({ _id: req.body.id }, item, (err) => {
@@ -76,10 +80,10 @@ function router(nav) {
             }
         });
     });
-    dashboardRouter.post("/updateauthor", function(req, res) {
+    dashboardRouter.post("/updateauthor", upload.single('image'), function(req, res) {
         var item = {
             author: req.body.author,
-            image: req.body.image,
+            image: req.file.image,
             description: req.body.description
         }
         authordata.updateOne({ _id: req.body.id }, item, (err) => {
@@ -97,10 +101,10 @@ function router(nav) {
 
 
 
-    dashboardRouter.post("/addauthor", function(req, res) {
+    dashboardRouter.post("/addauthor", upload.single('image'), function(req, res) {
         var item = {
             author: req.body.author,
-            image: req.body.image,
+            image: req.file.image,
             description: req.body.description
         }
         var author = authordata(item);
