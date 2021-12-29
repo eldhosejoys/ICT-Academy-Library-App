@@ -95,16 +95,16 @@
                                             <%=description%>
                                         </h1>
                                         <span class="card-text">
-                                        <form id="formsubmitlogin">
+                                        <form action="/dashboard/signin" method="POST" onsubmit= "validateForm()" id="formsubmitlogin">
                                             <span id="formerror"></span>
                                         <div class="form-group">
                                             <label for="email">Email Address:</label>
-                                            <input required type="email" class="form-control" id="username">
+                                            <input required type="email" class="form-control" id="username" name="username">
                                             <span id="emailerror"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="pwd">Password:</label>
-                                            <input required type="password" class="form-control" id="pwd">
+                                            <input required type="password" class="form-control" id="pwd" name="pwd">
                                             <span id="pwderror"></span>
                                         </div>
                                         <button type="submit" class="btn btn-success">Submit to login</button>

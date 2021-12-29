@@ -166,6 +166,15 @@ function router(nav) {
 
     });
 
+    dashboardRouter.post("/:id", function(req, res) {
+        const id = req.params.id;
+        if (id == "signin") {
+            if (req.body.username == "admin@admin.com" && req.body.pwd == "12345") {
+                res.redirect('/dashboard');
+            } else { res.redirect('/signin'); }
+        }
+    });
+
     dashboardRouter.get("/:id", function(req, res) {
         const id = req.params.id;
         if (id == "addbooks") {

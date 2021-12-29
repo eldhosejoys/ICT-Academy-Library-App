@@ -8,8 +8,8 @@ function validate(username, pwd, usernamevalidate, pwdvalidate) {
     var pwdcheck = pwdvalidate(pwd);
     if (usercheck && pwdcheck) {
         formerror.innerHTML = "";
-        window.location.href = "/dashboard";
-        return false;
+        //window.location.href = "/dashboard/signin";
+        return true;
     } else {
         formerror.innerHTML = "<div class='alert alert-danger rounded-0'>✖ Either Username or Password is wrong.</div>";
         return false;
@@ -38,6 +38,10 @@ username.onfocus = function() {
 
 pwd.onfocus = function() {
     formerror.innerHTML = "";
+}
+
+function validateForm() {
+    return validate(username.value, pwd.value, usernamevalidate, pwdvalidate);
 }
 
 formsubmitlogin.onsubmit = function() {
