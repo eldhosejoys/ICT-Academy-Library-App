@@ -66,5 +66,5 @@ app.get("/signup", function(req, res) {
 });
 
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 5002;
 app.listen(port);
