@@ -89,34 +89,41 @@
                                         Successfully Added Author.
                                     </div>
                                     <% } %>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h1 class="card-title text-center mb-5">
-                                                    <%=description%>
-                                                </h1>
-                                                <span class="card-text">
+                                        <% if(whois != "admin-of-library"){ %>
+                                            <div class="" role="alert">
+                                                <form action="/dashboard/addauthors" method="GET" id="formsubmitlogin">
+                                                    <div class="form-group"><input required class="form-control" name="whois" value="" placeholder="Type the password to add author"></div><button type="submit" class="btn btn-danger">Login as Admin to add new author</button></form>
+                                            </div>
+                                            <% } else{ %>
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h1 class="card-title text-center mb-5">
+                                                            <%=description%>
+                                                        </h1>
+                                                        <span class="card-text">
                                         <form  action="/dashboard/addauthor" enctype="multipart/form-data" method="POST" id="formsubmitlogin">
                                             <span id="formerror"></span>
-                                                <div class="form-group">
-                                                    <label for="author">Author:</label>
-                                                    <input required type="text" maxlength="30" class="form-control" name="author">
-                                                    <span id="authorerror"></span>
+                                                        <div class="form-group">
+                                                            <label for="author">Author:</label>
+                                                            <input required type="text" maxlength="30" class="form-control" name="author">
+                                                            <span id="authorerror"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="image">Image:</label>
+                                                            <input required type="file" class="form-control" name="image">
+                                                            <span id="imageerror"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="description">Description:</label>
+                                                            <textarea required type="text" row="5" maxlength="30000" class="form-control" name="description"></textarea>
+                                                            <span id="descriptionerror"></span>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-success">Add New Author</button>
+                                                        </form>
+                                                        </span><br>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="image">Image:</label>
-                                                    <input required type="file" class="form-control" name="image">
-                                                    <span id="imageerror"></span>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="description">Description:</label>
-                                                    <textarea required type="text" row="5" maxlength="30000" class="form-control" name="description"></textarea>
-                                                    <span id="descriptionerror"></span>
-                                                </div>
-                                                <button type="submit" class="btn btn-success">Add New Author</button>
-                                                </form>
-                                                </span><br>
-                                            </div>
-                                        </div>
+                                                <% } %>
                             </div>
                             <div class="col-lg-3"></div>
                         </div>

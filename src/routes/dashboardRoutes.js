@@ -258,14 +258,16 @@ function router(nav) {
                 title: "Add New Book",
                 description: "You can add new books here.",
                 nav,
-                status: req.query.status
+                status: req.query.status,
+                whois: req.query.whois
             });
         } else if (id == "addauthors") {
             res.render("addauthors", {
                 title: "Add New Author",
                 description: "You can add new authors here.",
                 nav,
-                status: req.query.status
+                status: req.query.status,
+                whois: req.query.whois
             });
         } else if (id == "deletebooks") {
             bookdata.find()
@@ -275,7 +277,8 @@ function router(nav) {
                         description: "Delete books of the Library App",
                         nav,
                         books,
-                        status: req.query.status
+                        status: req.query.status,
+                        whois: req.query.whois
                     });
                 })
         } else if (id == "deleteauthors") {
@@ -286,7 +289,8 @@ function router(nav) {
                         description: "Delete authors of the books in the Library App",
                         nav,
                         authors,
-                        status: req.query.status
+                        status: req.query.status,
+                        whois: req.query.whois
                     });
                 })
         } else if (id == "updatebooks") {
@@ -297,7 +301,8 @@ function router(nav) {
                         description: "Update book: " + req.query.id,
                         nav,
                         books,
-                        status: req.query.status
+                        status: req.query.status,
+                        whois: req.query.whois
                     });
                 })
         } else if (id == "updateauthors") {
@@ -308,7 +313,8 @@ function router(nav) {
                         description: "Update Author: " + req.query.id,
                         nav,
                         authors,
-                        status: req.query.status
+                        status: req.query.status,
+                        whois: req.query.whois
                     });
                 })
         } else if (id == "deleteusers") {
