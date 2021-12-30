@@ -96,7 +96,9 @@
                                         </h1>
                                         <span class="card-text">
                                         <form action="/dashboard/signin" method="POST" onsubmit= "validateForm()" id="formsubmitlogin">
-                                            <span id="formerror"></span>
+                                            <span id="formerror">
+                                                <% if(error == "notfound"){%><div class='alert alert-danger rounded-0'>✖ Either Username or Password is wrong.</div><% } %>
+                                            </span>
                                         <div class="form-group">
                                             <label for="email">Email Address:</label>
                                             <input required type="email" class="form-control" id="username" name="username">

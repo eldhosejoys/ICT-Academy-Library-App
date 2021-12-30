@@ -8,9 +8,9 @@
         <%=title%>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
 </head>
 
 <body>
@@ -23,7 +23,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-                <a href="/" class="navbar-brand">Home</a>
+                <a href="/dashboard" class="navbar-brand">Home</a>
             </div>
             <nav class="collapse navbar-collapse" role="navigation">
                 <ul class="nav navbar-nav">
@@ -36,13 +36,9 @@
                         <% } %>
                 </ul>
                 <ul class="nav navbar-right navbar-nav">
-                    <% for(i=0 ; i< nav2.length ; i++){ %>
-                        <li>
-                            <a href="<%=nav2[i].link %>">
-                                <%=nav2[i].text %>
-                            </a>
-                        </li>
-                        <% } %>
+                    <li>
+                        <a href="/">Logout</a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -54,7 +50,7 @@
                 <div class="col-md-7">
                     <h1>
                         <%=title%>
-                            <p class="lead mt-4">
+                            <p class="lead">
                                 <%=description%>
                             </p>
                     </h1>
@@ -81,58 +77,48 @@
         <div class="row">
 
             <div class="col-md-12">
+                <% if(whois != "admin-of-library"){ %>
+                    <div class="" role="alert">
+                        <form action="/dashboard/deleteusers" method="POST" id="formsubmitlogin">
+                            <div class="form-group"><input required class="form-control" name="whois" value="" placeholder="Type the password to manage users"></div><button type="submit" class="btn btn-danger">Login as Admin to manage users</button></form>
+                    </div>
+                    <% } else{ %>
+                        <div class="panel">
+                            <div class="panel-body">
+                                <h3>Showing User Data from database</h3>
 
-                <div class="panel">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-3"></div>
-                            <div class="col-lg-6">
+                                <% for(i=0 ; i< users.length ; i++){ %>
+                                    <div class="row">
+                                        <br>
+                                        <div class="col-md-2 col-sm-3 text-center">
 
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h1 class="card-title text-center pb-5">
-                                            <%=description%>
-                                        </h1>
-                                        <span class="card-text">
-                                        <form action="/dashboard/signup"  method="POST" onsubmit= "validateForm()" id="formsubmitsignup">
-                                            <span id="formerror">
-                                                <% if(error == "redirected"){%><div class='alert alert-danger rounded-0'>✖ Something went wrong.</div><% } %>
-                                            </span>
-                                        <div class="form-group">
-                                            <label for="name">Name:</label>
-                                            <input required type="text" class="form-control" id="name" name="name">
-                                            <span id="nameerror"></span>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="email">Email address:</label>
-                                            <input required type="email" class="form-control" id="email" name="email">
-                                            <span id="emailerror"></span>
+                                        <div class="col-md-10 col-sm-9">
+                                            <h3>
+                                                <%=users[i].name %>
+                                            </h3>
+                                            <div class="row">
+                                                <div class="col-xs-9">
+                                                    <h4><span class="label label-success">by <%=users[i].email %></span>
+                                                    </h4>
+                                                    <h4>
+
+                                                        <form action="/dashboard/deleteuser" method="POST" id="formsubmitlogin">
+                                                            <div class="form-group"><input type="hidden" required class="form-control" name="id" value="<%=users[i]._id %>"></div><button type="submit" class="btn btn-danger" onclick="return confirm(`Are you sure to Delete this User? You cannot undo this.💀`)">Delete this User</button></form>
+                                                    </h4>
+                                                </div>
+                                                <div class="col-xs-3"></div>
+                                            </div>
+                                            <br><br>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="Mobile Number">Mobile Number:</label>
-                                            <input required type="tel" class="form-control" id="mobile" name="mobile">
-                                            <span id="mobileerror"></span>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="pwd">Password:</label>
-                                            <input required type="password" class="form-control" id="pwd" name="pwd">
-                                            <span id="pwderror"></span>
-                                        </div>
-                                        <button type="submit" class="btn btn-success">Create a new Account</button>
-                                        </form>
-                                        </span><br>
-                                        <p><a href="/signin"> Signin to your account</a></p>
                                     </div>
-                                </div>
+                                    <hr>
+                                    <% } %>
+
                             </div>
-                            <div class="col-lg-3"></div>
                         </div>
 
-                    </div>
-                </div>
-
-
-
+                        <% } %>
             </div>
             <!--/col-12-->
         </div>
@@ -181,7 +167,6 @@
     <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/validatesignup.js"></script>
 </body>
 
 </html>

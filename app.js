@@ -49,7 +49,8 @@ app.get("/signin", function(req, res) {
         title: "Login Page",
         description: "Login to the Library App",
         nav,
-        nav2
+        nav2,
+        error: req.query.error
 
     });
 });
@@ -59,8 +60,8 @@ app.get("/signup", function(req, res) {
         title: "Signup Page",
         description: "Signup to the Library App",
         nav,
-        nav2
-
+        nav2,
+        error: req.query.error
     });
 });
 

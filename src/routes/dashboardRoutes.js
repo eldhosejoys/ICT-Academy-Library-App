@@ -2,6 +2,7 @@ const express = require("express");
 const dashboardRouter = express.Router();
 const bookdata = require('../models/bookdata');
 const authordata = require('../models/authordata');
+const userdata = require('../models/userdata');
 const multer = require("multer");
 const fs = require('fs');
 
@@ -37,6 +38,9 @@ function router(nav) {
     }, {
         text: "Update/Delete Authors",
         link: "/dashboard/deleteauthors"
+    }, {
+        text: "Manage Users",
+        link: "/dashboard/deleteusers"
     }];
 
     dashboardRouter.get("/", function(req, res) {
@@ -92,6 +96,24 @@ function router(nav) {
         authordata.findByIdAndRemove({ _id: req.body.id })
             .then(function() {
                 res.redirect('/dashboard/deleteauthors?' + req.body.id + '&status=deleted');
+            })
+    });
+
+    dashboardRouter.post("/deleteuser", function(req, res) {
+        userdata.findByIdAndRemove({ _id: req.body.id })
+            .then(function() {
+
+                userdata.find()
+                    .then(function(users) {
+                        res.render("deleteusers", {
+                            title: "Delete Users",
+                            description: "Delete users of the Library App",
+                            nav,
+                            users,
+                            whois: "admin-of-library"
+                        });
+                    })
+
             })
     });
 
@@ -170,8 +192,62 @@ function router(nav) {
         const id = req.params.id;
         if (id == "signin") {
             if (req.body.username == "admin@admin.com" && req.body.pwd == "12345") {
-                res.redirect('/dashboard');
-            } else { res.redirect('/signin'); }
+                res.redirect('/dashboard?source=signin-admin');
+            } else {
+                userdata.findOne({ email: req.body.username, password: req.body.pwd })
+                    .then(function(users) {
+                        if (!users) {
+                            res.redirect('/signin?error=notfound');
+                        } else {
+                            res.redirect('/dashboard?source=signin');
+                        }
+
+                    })
+            }
+        } else if (id == "signup") {
+            var emailRegex = /^([A-Za-z0-9\.-]+)\@([A-Za-z0-9-]+)\.([A-Za-z]{2,3})(\.[A-Za-z]{2,3})?$/;
+            var mobileRegex = /^[0-9]{10,10}$/;
+            var mobileRegex1 = /^([0-9]{3,3})\.([0-9]{3,3})\.([0-9]{4,4})$/;
+            var mobileRegex2 = /^([0-9]{3,3})\s([0-9]{3,3})\s([0-9]{4,4})$/;
+            var mobileRegex3 = /^([0-9]{3,3})-([0-9]{3,3})-([0-9]{4,4})$/;
+            var nameRegex = /^([A-Za-z]{1,30})(\s[A-Za-z]{1,30}){0,2}$/;
+            var p1r = /(?=.*[A-Z])/;
+            var p2r = /(?=.*[a-z])/;
+            var p3r = /\d/;
+
+            if (emailRegex.test(req.body.email) && (mobileRegex.test(req.body.mobile) || mobileRegex1.test(req.body.mobile) || mobileRegex2.test(req.body.mobile) || mobileRegex3.test(req.body.mobile)) && nameRegex.test(req.body.name) && req.body.pwd.length >= 8 && p3r.test(req.body.pwd) && p2r.test(req.body.pwd) && p1r.test(req.body.pwd)) {
+                userdata.findOne({ email: req.body.email })
+                    .then(function(users) {
+                        if (!users) {
+                            var item = {
+                                name: req.body.name,
+                                email: req.body.email,
+                                mobile: req.body.mobile,
+                                password: req.body.pwd
+                            }
+                            var user = userdata(item);
+                            user.save();
+                            res.redirect('/dashboard?source=signup');
+                        } else {
+
+                            res.redirect('/dashboard?source=alreadysignedup');
+                        }
+                    })
+
+            } else {
+                res.redirect('/signup?error=redirected');
+            }
+        } else if (id == "deleteusers") {
+            userdata.find()
+                .then(function(users) {
+                    res.render("deleteusers", {
+                        title: "Delete Users",
+                        description: "Delete users of the Library App",
+                        nav,
+                        users,
+                        whois: req.body.whois
+                    });
+                })
         }
     });
 
@@ -235,10 +311,21 @@ function router(nav) {
                         status: req.query.status
                     });
                 })
+        } else if (id == "deleteusers") {
+            userdata.find()
+                .then(function(users) {
+                    res.render("deleteusers", {
+                        title: "Delete Users",
+                        description: "Delete users of the Library App",
+                        nav,
+                        users,
+                        whois: req.query.whois
+                    });
+                })
         }
+
     });
 
     return dashboardRouter;
 }
-module.exports = router;
 module.exports = router;
