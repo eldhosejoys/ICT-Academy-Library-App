@@ -91,7 +91,7 @@
                                     <% } %>
                                         <% if(whois != "admin-of-library"){ %>
                                             <div class="" role="alert">
-                                                <form action="/dashboard/addauthors" method="GET" id="formsubmitlogin">
+                                                <form action="/dashboard/addauthors" method="POST" id="formsubmitlogin">
                                                     <div class="form-group"><input required class="form-control" name="whois" value="" placeholder="Type the password to add author"></div><button type="submit" class="btn btn-danger">Login as Admin to add new author</button></form>
                                             </div>
                                             <% } else{ %>

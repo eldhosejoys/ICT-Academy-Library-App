@@ -188,7 +188,7 @@ function router(nav) {
 
     });
 
-    dashboardRouter.post("/:id", function(req, res) {
+    dashboardRouter.all("/:id", function(req, res) {
         const id = req.params.id;
         if (id == "signin") {
             if (req.body.username == "admin@admin.com" && req.body.pwd == "12345") {
@@ -237,29 +237,13 @@ function router(nav) {
             } else {
                 res.redirect('/signup?error=redirected');
             }
-        } else if (id == "deleteusers") {
-            userdata.find()
-                .then(function(users) {
-                    res.render("deleteusers", {
-                        title: "Delete Users",
-                        description: "Delete users of the Library App",
-                        nav,
-                        users,
-                        whois: req.body.whois
-                    });
-                })
-        }
-    });
-
-    dashboardRouter.get("/:id", function(req, res) {
-        const id = req.params.id;
-        if (id == "addbooks") {
+        } else if (id == "addbooks") {
             res.render("addbooks", {
                 title: "Add New Book",
                 description: "You can add new books here.",
                 nav,
                 status: req.query.status,
-                whois: req.query.whois
+                whois: req.body.whois
             });
         } else if (id == "addauthors") {
             res.render("addauthors", {
@@ -267,7 +251,7 @@ function router(nav) {
                 description: "You can add new authors here.",
                 nav,
                 status: req.query.status,
-                whois: req.query.whois
+                whois: req.body.whois
             });
         } else if (id == "deletebooks") {
             bookdata.find()
@@ -278,7 +262,7 @@ function router(nav) {
                         nav,
                         books,
                         status: req.query.status,
-                        whois: req.query.whois
+                        whois: req.body.whois
                     });
                 })
         } else if (id == "deleteauthors") {
@@ -290,7 +274,7 @@ function router(nav) {
                         nav,
                         authors,
                         status: req.query.status,
-                        whois: req.query.whois
+                        whois: req.body.whois
                     });
                 })
         } else if (id == "updatebooks") {
@@ -302,7 +286,7 @@ function router(nav) {
                         nav,
                         books,
                         status: req.query.status,
-                        whois: req.query.whois
+                        whois: req.body.whois
                     });
                 })
         } else if (id == "updateauthors") {
@@ -314,7 +298,7 @@ function router(nav) {
                         nav,
                         authors,
                         status: req.query.status,
-                        whois: req.query.whois
+                        whois: req.body.whois
                     });
                 })
         } else if (id == "deleteusers") {
@@ -325,7 +309,7 @@ function router(nav) {
                         description: "Delete users of the Library App",
                         nav,
                         users,
-                        whois: req.query.whois
+                        whois: req.body.whois
                     });
                 })
         }

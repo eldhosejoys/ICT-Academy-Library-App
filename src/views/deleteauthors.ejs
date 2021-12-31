@@ -85,7 +85,7 @@
 
                         <% if(whois != "admin-of-library"){ %>
                             <div class="" role="alert">
-                                <form action="/dashboard/deleteauthors" method="GET" id="formsubmitlogin">
+                                <form action="/dashboard/deleteauthors" method="POST" id="formsubmitlogin">
                                     <div class="form-group"><input required class="form-control" name="whois" value="" placeholder="Type the password to manage authors"></div><button type="submit" class="btn btn-danger">Login as Admin to manage authors</button></form>
                             </div>
                             <% } else{ %>
